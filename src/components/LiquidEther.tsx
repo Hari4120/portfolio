@@ -569,7 +569,7 @@ export default function LiquidEther({
         this.line = new THREE.LineSegments(boundaryG, boundaryM);
         this.scene.add(this.line);
       }
-      update({ dt, isBounce, BFECC }: any) {
+      updatePass({ dt, isBounce, BFECC }: any) {
         this.uniforms.dt.value = dt;
         this.line.visible = isBounce;
         this.uniforms.isBFECC.value = BFECC;
@@ -601,7 +601,7 @@ export default function LiquidEther({
         this.mouse = new THREE.Mesh(mouseG, mouseM);
         this.scene.add(this.mouse);
       }
-      update(props: any) {
+      updatePass(props: any) {
         const forceX = (Mouse.diff.x / 2) * props.mouse_force;
         const forceY = (Mouse.diff.y / 2) * props.mouse_force;
         const cursorSizeX = props.cursor_size * props.cellScale.x;
@@ -643,7 +643,7 @@ export default function LiquidEther({
         });
         this.init();
       }
-      update({ viscous, iterations, dt }: any) {
+      updatePass({ viscous, iterations, dt }: any) {
         let fbo_in, fbo_out;
         this.uniforms.v.value = viscous;
         for (let i = 0; i < iterations; i++) {
@@ -680,7 +680,7 @@ export default function LiquidEther({
         });
         this.init();
       }
-      update({ vel }: any) {
+      updatePass({ vel }: any) {
         this.uniforms.velocity.value = vel.texture;
         super.update();
       }
@@ -705,7 +705,7 @@ export default function LiquidEther({
         });
         this.init();
       }
-      update({ iterations }: any) {
+      updatePass({ iterations }: any) {
         let p_in, p_out;
         for (let i = 0; i < iterations; i++) {
           if (i % 2 === 0) {
@@ -741,7 +741,7 @@ export default function LiquidEther({
         });
         this.init();
       }
-      update({ vel, pressure }: any) {
+      updatePass({ vel, pressure }: any) {
         this.uniforms.velocity.value = vel.texture;
         this.uniforms.pressure.value = pressure.texture;
         super.update();
@@ -875,29 +875,29 @@ export default function LiquidEther({
         } else {
           this.boundarySpace.copy(this.cellScale);
         }
-        this.advection.update({
+        this.advection.updatePass({
           dt: this.options.dt,
           isBounce: this.options.isBounce,
           BFECC: this.options.BFECC
         });
-        this.externalForce.update({
+        this.externalForce.updatePass({
           cursor_size: this.options.cursor_size,
           mouse_force: this.options.mouse_force,
           cellScale: this.cellScale
         });
         let vel = this.fbos.vel_1;
         if (this.options.isViscous) {
-          vel = this.viscous.update({
+          vel = this.viscous.updatePass({
             viscous: this.options.viscous,
             iterations: this.options.iterations_viscous,
             dt: this.options.dt
           });
         }
-        this.divergence.update({ vel });
-        const pressure = this.poisson.update({
+        this.divergence.updatePass({ vel });
+        const pressure = this.poisson.updatePass({
           iterations: this.options.iterations_poisson
         });
-        this.pressure.update({ vel, pressure });
+        this.pressure.updatePass({ vel, pressure });
       }
     }
 

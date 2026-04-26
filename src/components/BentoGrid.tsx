@@ -1,7 +1,7 @@
 "use client";
 
 import { useRef, MouseEvent } from "react";
-import { motion } from "framer-motion";
+import { motion, Variants } from "framer-motion";
 import { siteContent } from "@/data/content";
 import ScrambleText from "./ScrambleText";
 import { PerspectiveCamera } from "@react-three/drei";
@@ -70,12 +70,12 @@ function SecurityShield() {
   );
 }
 
-const gridVariants = {
+const gridVariants: Variants = {
   hidden: {},
   visible: { transition: { staggerChildren: 0.3 } },
 };
 
-const cardVariants = {
+const cardVariants: Variants = {
   hidden: { opacity: 0, scale: 0.95, y: 30 },
   visible: { opacity: 1, scale: 1, y: 0, transition: { duration: 0.8, ease: [0.2, 0.65, 0.3, 0.9] } },
 };

@@ -12,7 +12,7 @@ import { Canvas } from "@react-three/fiber";
 import { View } from "@react-three/drei";
 
 export default function Home() {
-  const containerRef = useRef<HTMLDivElement>(null);
+  const containerRef = useRef<HTMLDivElement>(null!);
 
   return (
     <main ref={containerRef} className="relative w-full selection:bg-white selection:text-black z-10">
