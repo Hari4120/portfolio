@@ -314,13 +314,9 @@ function CameraManager({ progressRef }: { progressRef: React.MutableRefObject<nu
   return null;
 }
 
-const texts = [
-  "Engineering distributed microservices.",
-  "Architecting enterprise security platforms.",
-  "Integrating AI-powered capabilities.",
-  "Bridging the gap between frontend interfaces, deep backend orchestration, and secure cloud infrastructure.",
-  "Designing systems that remain reliable, secure, and fast under real-world load."
-];
+import { siteContent } from "@/data/content";
+
+const texts = siteContent.summaryPhases;
 
 const wordVariants = {
   hidden: (d: number) => ({ opacity: 0, filter: "blur(10px)", x: d * 20 }),

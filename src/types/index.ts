@@ -4,6 +4,13 @@ export interface Experience {
   description: string;
 }
 
+export interface ExperienceBlock {
+  company: string;
+  period: string;
+  description: string;
+  items: Experience[];
+}
+
 export interface Project {
   title: string;
   description: string;
@@ -24,8 +31,10 @@ export interface SiteConfig {
   author: string;
   role: string;
   location: string;
-  phone: string;
   email: string;
+  github: string;
+  linkedin: string;
+  resumePath: string;
 }
 
 export interface HeroContent {
@@ -38,8 +47,8 @@ export interface SiteContent {
   config: SiteConfig;
   nav: NavItem[];
   hero: HeroContent;
-  summary: string;
+  summaryPhases: string[];
   skills: string[];
-  experiences: Experience[];
+  experienceBlocks: ExperienceBlock[];
   projects: Project[];
 }

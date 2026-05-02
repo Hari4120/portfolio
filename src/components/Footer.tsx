@@ -6,6 +6,25 @@ import ScrollTrigger from "gsap/ScrollTrigger";
 import { siteContent } from "@/data/content";
 import LiquidEther from "./LiquidEther";
 
+function GithubIcon({ className }: { className?: string }) {
+  return (
+    <svg className={className} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+      <path d="M15 22v-4a4.8 4.8 0 0 0-1-3.5c3 0 6-2 6-5.5.08-1.25-.27-2.48-1-3.5.28-1.15.28-2.35 0-3.5 0 0-1 0-3 1.5-2.64-.5-5.36-.5-8 0C6 2 5 2 5 2c-.3 1.15-.3 2.35 0 3.5A5.403 5.403 0 0 0 4 9c0 3.5 3 5.5 6 5.5-.39.49-.68 1.05-.85 1.65-.17.6-.22 1.23-.15 1.85v4" />
+      <path d="M9 18c-4.51 2-5-2-7-2" />
+    </svg>
+  );
+}
+
+function LinkedinIcon({ className }: { className?: string }) {
+  return (
+    <svg className={className} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+      <path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z" />
+      <rect width="4" height="12" x="2" y="9" />
+      <circle cx="4" cy="4" r="2" />
+    </svg>
+  );
+}
+
 export default function Footer() {
   const footerRef = useRef<HTMLElement>(null);
   const monolithRef = useRef<HTMLHeadingElement>(null);
@@ -54,19 +73,34 @@ export default function Footer() {
         </h2>
       </div>
       
-      <div className="z-10 flex flex-col items-center gap-12 px-6 text-center w-full mt-auto">
+      <div className="z-10 flex flex-col items-center gap-8 px-6 text-center w-full mt-auto">
         <div className="flex flex-col md:flex-row gap-6 md:gap-8 items-center bg-slate-950/50 p-6 md:p-8 rounded-3xl backdrop-blur-xl border border-white/10 shadow-2xl hover:border-teal-400/50 transition-colors pointer-events-auto">
           <a href={`mailto:${siteContent.config.email}`} className="font-mono text-sm tracking-widest uppercase hover:text-teal-400 transition-colors">
             {siteContent.config.email}
           </a>
           <span className="hidden md:block text-white/20">•</span>
           <span className="font-mono text-sm tracking-widest uppercase text-white/70">
-            {siteContent.config.phone}
-          </span>
-          <span className="hidden md:block text-white/20">•</span>
-          <span className="font-mono text-sm tracking-widest uppercase text-white/70">
             {siteContent.config.location}
           </span>
+        </div>
+
+        <div className="flex items-center gap-4 pointer-events-auto">
+          <a 
+            href={siteContent.config.github} 
+            target="_blank" 
+            rel="noopener noreferrer"
+            className="p-3 rounded-full border border-white/10 hover:border-teal-400/50 hover:bg-teal-400/10 transition-all duration-300 group"
+          >
+            <GithubIcon className="w-5 h-5 text-white/50 group-hover:text-teal-400 transition-colors" />
+          </a>
+          <a 
+            href={siteContent.config.linkedin} 
+            target="_blank" 
+            rel="noopener noreferrer"
+            className="p-3 rounded-full border border-white/10 hover:border-teal-400/50 hover:bg-teal-400/10 transition-all duration-300 group"
+          >
+            <LinkedinIcon className="w-5 h-5 text-white/50 group-hover:text-teal-400 transition-colors" />
+          </a>
         </div>
         
         <p className="font-mono text-white/30 text-xs tracking-widest uppercase pointer-events-none">

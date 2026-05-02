@@ -1,25 +1,30 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { useEffect, useState, useRef } from "react";
+import { useInView } from "framer-motion";
 
-const CHARS = "ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789!@#$%^&*()_+{}[]|:;<>,.?/~`";
+const CHARS = "+-•~*/\\|";
 
-export default function ScrambleText({ text, duration = 500, delay = 0 }: { text: string; duration?: number; delay?: number }) {
-  const [displayText, setDisplayText] = useState(text.replace(/./g, "\u00A0")); // start with empty spaces to hold size
+export default function ScrambleText({ text, duration = 600, delay = 0 }: { text: string; duration?: number; delay?: number }) {
+  const [displayText, setDisplayText] = useState(text.replace(/./g, "\u00A0"));
   const [isScrambling, setIsScrambling] = useState(false);
+  const ref = useRef<HTMLSpanElement>(null);
+  const isInView = useInView(ref, { once: true, margin: "-10%" });
 
   useEffect(() => {
+    if (!isInView) return;
+
     let timeout: ReturnType<typeof setTimeout>;
     let interval: ReturnType<typeof setInterval>;
 
     const startScramble = () => {
       setIsScrambling(true);
       const startTime = Date.now();
-      
+
       interval = setInterval(() => {
         const now = Date.now();
         const progress = Math.min((now - startTime) / duration, 1);
-        
+
         if (progress >= 1) {
           setDisplayText(text);
           setIsScrambling(false);
@@ -35,7 +40,7 @@ export default function ScrambleText({ text, duration = 500, delay = 0 }: { text
         }).join("");
 
         setDisplayText(nextText);
-      }, 30);
+      }, 40);
     };
 
     if (delay > 0) {
@@ -48,7 +53,14 @@ export default function ScrambleText({ text, duration = 500, delay = 0 }: { text
       clearTimeout(timeout);
       clearInterval(interval);
     };
-  }, [text, duration, delay]);
+  }, [text, duration, delay, isInView]);
 
-  return <span className={isScrambling ? "font-mono opacity-80" : ""}>{displayText}</span>;
+  return (
+    <span
+      ref={ref}
+      className={`transition-opacity duration-300 ${isScrambling ? "opacity-60 tracking-widest font-mono text-teal-400/80" : "opacity-100"}`}
+    >
+      {displayText}
+    </span>
+  );
 }

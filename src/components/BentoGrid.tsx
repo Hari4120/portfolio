@@ -3,7 +3,6 @@
 import { useRef, MouseEvent } from "react";
 import { motion, Variants } from "framer-motion";
 import { siteContent } from "@/data/content";
-import ScrambleText from "./ScrambleText";
 import { PerspectiveCamera } from "@react-three/drei";
 import { Canvas, useFrame } from "@react-three/fiber";
 import * as THREE from "three";
@@ -122,7 +121,7 @@ function BentoCard({ project, index }: { project: typeof siteContent.projects[0]
 
           <div>
             <h3 className="text-2xl font-bold text-slate-50 mb-2">
-              <ScrambleText text={project.title} delay={index * 300 + 600} duration={800} />
+              {project.title}
             </h3>
             <p className="text-slate-400 font-mono text-sm tracking-wide leading-relaxed line-clamp-3">
               {project.description}
