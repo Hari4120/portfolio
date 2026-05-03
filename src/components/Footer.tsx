@@ -89,17 +89,17 @@ export default function Footer() {
             href={siteContent.config.github} 
             target="_blank" 
             rel="noopener noreferrer"
-            className="p-3 rounded-full border border-white/10 hover:border-teal-400/50 hover:bg-teal-400/10 transition-all duration-300 group"
+            className="p-4 rounded-full border border-white/10 hover:border-teal-400/50 hover:bg-teal-400/10 transition-all duration-300 group"
           >
-            <GithubIcon className="w-5 h-5 text-white/50 group-hover:text-teal-400 transition-colors" />
+            <GithubIcon className="w-6 h-6 text-white/50 group-hover:text-teal-400 transition-colors" />
           </a>
           <a 
             href={siteContent.config.linkedin} 
             target="_blank" 
             rel="noopener noreferrer"
-            className="p-3 rounded-full border border-white/10 hover:border-teal-400/50 hover:bg-teal-400/10 transition-all duration-300 group"
+            className="p-4 rounded-full border border-white/10 hover:border-teal-400/50 hover:bg-teal-400/10 transition-all duration-300 group"
           >
-            <LinkedinIcon className="w-5 h-5 text-white/50 group-hover:text-teal-400 transition-colors" />
+            <LinkedinIcon className="w-6 h-6 text-white/50 group-hover:text-teal-400 transition-colors" />
           </a>
         </div>
         

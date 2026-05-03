@@ -1,7 +1,7 @@
 "use client";
 
-import { useRef, MouseEvent } from "react";
-import { motion, Variants } from "framer-motion";
+import { useRef, MouseEvent, useState, useEffect } from "react";
+import { motion, Variants, useInView } from "framer-motion";
 import { siteContent } from "@/data/content";
 import { PerspectiveCamera } from "@react-three/drei";
 import { Canvas, useFrame } from "@react-three/fiber";
@@ -80,6 +80,9 @@ const cardVariants: Variants = {
 };
 
 function BentoCard({ project, index }: { project: typeof siteContent.projects[0], index: number }) {
+  const cardRef = useRef<HTMLDivElement>(null);
+  const isInView = useInView(cardRef, { margin: "-50% 0px -50% 0px" });
+
   function handleMouseMove(e: MouseEvent<HTMLDivElement>) {
     const rect = e.currentTarget.getBoundingClientRect();
     e.currentTarget.style.setProperty('--mouse-x', `${e.clientX - rect.left}px`);
@@ -88,22 +91,23 @@ function BentoCard({ project, index }: { project: typeof siteContent.projects[0]
 
   return (
     <motion.div
+      ref={cardRef}
       variants={cardVariants}
       onMouseMove={handleMouseMove}
-      className={`group relative flex flex-col overflow-hidden rounded-2xl border border-slate-800 bg-slate-950 min-h-[350px] ${project.colSpan} p-[1px]`}
+      className={`group relative flex flex-col overflow-hidden rounded-2xl border border-slate-800 bg-slate-950 min-h-[350px] ${project.colSpan} p-[1px] ${isInView ? 'is-active' : ''}`}
     >
       <div 
-        className="pointer-events-none absolute inset-0 opacity-0 transition-opacity duration-300 group-hover:opacity-100 z-20"
-        style={{ background: 'radial-gradient(400px circle at var(--mouse-x, 0) var(--mouse-y, 0), rgba(45, 212, 191, 0.15) 0%, transparent 100%)' }}
+        className="pointer-events-none absolute inset-0 opacity-0 transition-opacity duration-300 group-hover:opacity-100 max-md:group-[.is-active]:opacity-100 z-20"
+        style={{ background: 'radial-gradient(400px circle at var(--mouse-x, 50%) var(--mouse-y, 50%), rgba(45, 212, 191, 0.15) 0%, transparent 100%)' }}
       />
-      <div className="absolute inset-[-100%] bg-[conic-gradient(from_0deg,transparent_0_340deg,#2dd4bf_360deg)] opacity-0 group-hover:opacity-30 animate-[spin_4s_linear_infinite] z-0 pointer-events-none" />
+      <div className="absolute inset-[-100%] bg-[conic-gradient(from_0deg,transparent_0_340deg,#2dd4bf_360deg)] opacity-0 group-hover:opacity-30 max-md:group-[.is-active]:opacity-30 animate-[spin_4s_linear_infinite] z-0 pointer-events-none" />
       
       <div className="relative rounded-[15px] bg-slate-950/90 backdrop-blur-3xl z-10 flex flex-col flex-1 overflow-hidden">
         <div className="h-8 border-b border-white/5 flex items-center justify-between px-4 bg-white/[0.02]">
           <div className="flex gap-2">
-            <div className="w-2.5 h-2.5 rounded-full bg-slate-600 group-hover:bg-red-500 transition-colors" />
-            <div className="w-2.5 h-2.5 rounded-full bg-slate-600 group-hover:bg-yellow-500 transition-colors delay-75" />
-            <div className="w-2.5 h-2.5 rounded-full bg-slate-600 group-hover:bg-green-500 transition-colors delay-150" />
+            <div className="w-2.5 h-2.5 rounded-full bg-slate-600 group-hover:bg-red-500 max-md:group-[.is-active]:bg-red-500 transition-colors" />
+            <div className="w-2.5 h-2.5 rounded-full bg-slate-600 group-hover:bg-yellow-500 max-md:group-[.is-active]:bg-yellow-500 transition-colors delay-75" />
+            <div className="w-2.5 h-2.5 rounded-full bg-slate-600 group-hover:bg-green-500 max-md:group-[.is-active]:bg-green-500 transition-colors delay-150" />
           </div>
           <span className="text-[10px] font-mono text-slate-500 tracking-widest">SYS.MOD.0{index + 1}</span>
         </div>

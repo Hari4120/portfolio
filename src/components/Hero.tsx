@@ -1,6 +1,6 @@
 "use client";
 
-import { useMemo, useRef, useEffect } from "react";
+import { useMemo, useRef, useEffect, useState } from "react";
 import { useFrame } from "@react-three/fiber";
 import { View, PerspectiveCamera } from "@react-three/drei";
 import { motion, Variants } from "framer-motion";
@@ -29,7 +29,14 @@ function LinkedinIcon({ className }: { className?: string }) {
 
 function ParticleGrid() {
   const pointsRef = useRef<THREE.Points>(null);
-  const count = 3000;
+  const [count, setCount] = useState(1000);
+
+  useEffect(() => {
+    const handleResize = () => setCount(window.innerWidth < 768 ? 800 : 3000);
+    handleResize(); // init
+    window.addEventListener("resize", handleResize);
+    return () => window.removeEventListener("resize", handleResize);
+  }, []);
 
   const positions = useMemo(() => {
     const pos = new Float32Array(count * 3);
@@ -126,7 +133,7 @@ export default function Hero() {
           initial="hidden"
           animate="visible"
           className="font-bold uppercase tracking-tighter text-white flex justify-center w-full"
-          style={{ fontSize: "clamp(2.5rem, 8vw, 8rem)", lineHeight: 1 }}
+          style={{ fontSize: "clamp(1.8rem, 6vw, 8rem)", lineHeight: 1 }}
         >
           {siteContent.hero.heading.split("").map((char, index) => (
             <motion.span key={index} variants={letter} className="inline-block">

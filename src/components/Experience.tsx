@@ -73,50 +73,61 @@ export default function Experience() {
   };
 
   useEffect(() => {
-    ScrollTrigger.create({
-      trigger: sectionRef.current,
-      start: "top top",
-      end: "bottom bottom",
-      pin: leftColRef.current,
-      scrub: true,
-    });
+    const mm = gsap.matchMedia();
 
-    const entranceTl = gsap.timeline({
-      scrollTrigger: {
+    mm.add("(min-width: 768px)", () => {
+      ScrollTrigger.create({
         trigger: sectionRef.current,
         start: "top top",
-        end: "+=400",
-        scrub: 1,
-      }
-    });
+        end: "bottom bottom",
+        pin: leftColRef.current,
+        scrub: true,
+      });
 
-    entranceTl.fromTo('.left-col-elem',
-      { opacity: 0, x: -30 },
-      { opacity: 1, x: 0, duration: 0.8, stagger: 0.2, ease: "power3.out" }
-    )
-      .fromTo('.sticky-bg',
-        { opacity: 0 },
-        { opacity: 1, duration: 0.8, ease: "power2.out" },
-        "-=0.4"
+      const entranceTl = gsap.timeline({
+        scrollTrigger: {
+          trigger: sectionRef.current,
+          start: "top top",
+          end: "+=400",
+          scrub: 1,
+        }
+      });
+
+      entranceTl.fromTo('.left-col-elem',
+        { opacity: 0, x: -30 },
+        { opacity: 1, x: 0, duration: 0.8, stagger: 0.2, ease: "power3.out" }
       )
-      .fromTo('.sticky-content',
-        { opacity: 0, y: 20 },
-        { opacity: 1, y: 0, duration: 0.6, ease: "power3.out" },
-        "-=0.4"
-      );
+        .fromTo('.sticky-bg',
+          { opacity: 0 },
+          { opacity: 1, duration: 0.8, ease: "power2.out" },
+          "-=0.4"
+        )
+        .fromTo('.sticky-content',
+          { opacity: 0, y: 20 },
+          { opacity: 1, y: 0, duration: 0.6, ease: "power3.out" },
+          "-=0.4"
+        );
 
-    const exitTl = gsap.timeline({
-      scrollTrigger: {
-        trigger: sectionRef.current,
-        start: "bottom 130%",
-        end: "bottom 100%",
-        scrub: 1,
-      }
+      const exitTl = gsap.timeline({
+        scrollTrigger: {
+          trigger: sectionRef.current,
+          start: "bottom 130%", // Starts fading out just before the section unpins
+          end: "bottom 100%", // Finishes fading out exactly as it unpins
+          scrub: 1,
+        }
+      });
+
+      exitTl.to('.sticky-content', { opacity: 0, y: -20, duration: 0.6, ease: "power3.in" })
+            .to('.sticky-bg', { opacity: 0, duration: 0.8, ease: "power2.in" }, "-=0.4")
+            .to('.left-col-elem', { opacity: 0, x: -30, duration: 0.8, stagger: -0.2, ease: "power3.in" }, "-=0.6");
     });
 
-    exitTl.to('.sticky-content', { opacity: 0, y: -20, duration: 0.6, ease: "power3.in" })
-      .to('.sticky-bg', { opacity: 0, duration: 0.8, ease: "power2.in" }, "-=0.4")
-      .to('.left-col-elem', { opacity: 0, x: -30, duration: 0.8, stagger: -0.2, ease: "power3.in" }, "-=0.6");
+    // Mobile specific basic entrance
+    mm.add("(max-width: 767px)", () => {
+      gsap.to('.left-col-elem', { opacity: 1, x: 0, duration: 0.8, stagger: 0.1 });
+      gsap.to('.sticky-bg', { opacity: 1, duration: 0.8 });
+      gsap.to('.sticky-content', { opacity: 1, y: 0, duration: 0.8 });
+    });
 
     const rightItems = gsap.utils.toArray<HTMLElement>('.exp-item');
     rightItems.forEach((item) => {
@@ -187,7 +198,7 @@ export default function Experience() {
   return (
     <section id="experience" ref={sectionRef} className="w-full border-t border-white/10 relative">
       <div className="max-w-7xl mx-auto flex flex-col md:flex-row relative">
-        <div ref={leftColRef} className="w-full md:w-1/3 h-screen flex flex-col justify-center px-6 md:pr-12 lg:pr-24 py-12 md:py-0 border-b md:border-b-0 md:border-r border-white/10 relative z-10">
+        <div ref={leftColRef} className="w-full md:w-1/3 h-auto md:h-screen flex flex-col justify-center px-6 md:pr-12 lg:pr-24 py-12 md:py-0 border-b md:border-b-0 md:border-r border-white/10 relative z-10">
           <div className="p-8 md:p-0">
             <p className="left-col-elem opacity-0 text-teal-400 font-mono text-sm tracking-widest uppercase mb-4">Professional Timeline</p>
             <h2 className="left-col-elem opacity-0 text-5xl md:text-7xl font-bold tracking-tighter text-white">Experience</h2>

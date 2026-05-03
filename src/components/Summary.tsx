@@ -381,7 +381,7 @@ export default function Summary() {
       <AnimatePresence>
         {showUI && (
           <motion.div initial={{ opacity: 0, x: 20 }} animate={{ opacity: 1, x: 0 }} exit={{ opacity: 0 }}
-            className="absolute top-24 md:top-32 right-8 bg-slate-950/50 backdrop-blur-xl border border-slate-800 p-8 rounded-2xl text-teal-400 z-50 flex flex-col gap-4 shadow-[0_0_20px_rgba(45,212,191,0.05)] w-64">
+            className="absolute top-24 md:top-32 left-1/2 -translate-x-1/2 md:left-auto md:translate-x-0 md:right-8 bg-slate-950/50 backdrop-blur-xl border border-slate-800 p-6 md:p-8 rounded-2xl text-teal-400 z-50 flex flex-col gap-3 md:gap-4 shadow-[0_0_20px_rgba(45,212,191,0.05)] w-[90%] max-w-[300px] md:w-64">
             <div className="flex justify-between gap-12 font-bold text-sm tracking-widest"><span>SYSTEM LOAD</span><span className="text-white">{load.toFixed(1)}%</span></div>
             <div className="flex justify-between gap-12 font-bold text-sm tracking-widest"><span>UPTIME</span><span className="text-teal-400">100.00%</span></div>
             <div className="w-full h-1.5 bg-slate-800 rounded-full overflow-hidden mt-2 border border-slate-700/50"><div className="h-full bg-teal-400 shadow-[0_0_10px_#2dd4bf]" style={{ width: `${load}%` }} /></div>
