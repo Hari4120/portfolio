@@ -38,14 +38,16 @@ function ParticleGrid() {
     return () => window.removeEventListener("resize", handleResize);
   }, []);
 
-  const positions = useMemo(() => {
+  const [positions, setPositions] = useState<Float32Array | null>(null);
+
+  useEffect(() => {
     const pos = new Float32Array(count * 3);
     for (let i = 0; i < count; i++) {
       pos[i * 3] = (Math.random() - 0.5) * 40;
       pos[i * 3 + 1] = (Math.random() - 0.5) * 40;
       pos[i * 3 + 2] = (Math.random() - 0.5) * 20 - 10;
     }
-    return pos;
+    setPositions(pos);
   }, [count]);
 
   const scrollRef = useRef(0);
@@ -73,6 +75,8 @@ function ParticleGrid() {
     pointsRef.current.position.x = THREE.MathUtils.lerp(pointsRef.current.position.x, targetX, 0.02);
     pointsRef.current.position.y = THREE.MathUtils.lerp(pointsRef.current.position.y, targetY, 0.02);
   });
+
+  if (!positions) return null;
 
   return (
     <points ref={pointsRef}>

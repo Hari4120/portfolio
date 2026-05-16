@@ -3,7 +3,7 @@ import type { SiteContent } from "@/types";
 export const siteContent: SiteContent = {
   config: {
     title: "Abhinandan Barad | Full Stack Engineer",
-    description: "Portfolio of Abhinandan Barad - Full Stack Software Engineer specializing in Cloud, Security, and AI.",
+    description: "Portfolio of Abhinandan Barad - Full Stack Software Engineer specializing in Cloud, Security, AI, and Data Viz.",
     author: "Abhinandan Barad",
     role: "Full Stack Software Engineer",
     location: "Hyderabad, IN",
@@ -23,11 +23,11 @@ export const siteContent: SiteContent = {
   hero: {
     heading: "ABHINANDAN BARAD",
     role: "Software Engineer & Architect",
-    tagline: "Full Stack Engineer — Cloud, Security, AI.",
+    tagline: "Full Stack Engineer — Cloud, Security, AI, Data Viz.",
   },
 
   summaryPhases: [
-    "Engineering distributed microservices at scale.",
+    "Engineering distributed systems at scale — and knowing when to simplify them.",
     "Architecting enterprise security for regulated cloud platforms.",
     "Integrating AI agents into production workflows.",
     "Bridging the gap between frontend interfaces, backend orchestration, and secure cloud infrastructure.",
@@ -35,13 +35,13 @@ export const siteContent: SiteContent = {
   ],
 
   skills: [
-    "Python", "JavaScript (ES6+)", "TypeScript", "Java", "SQL",
-    "React.js", "Redux (Saga)", "HTML5", "CSS3", "Recharts", "Tailwind CSS",
+    "Python", "JavaScript (ES6+)", "TypeScript", "Java", "Fastify", "SQL",
+    "React.js", "Redux (Saga)", "TanStack Query", "Zod", "Recharts", "Tailwind CSS",
     "Flask", "RESTful APIs", "Microservices", "Event-Driven Design", "JSON Schema",
-    "AWS", "ECR", "S3", "Lambda", "DynamoDB", "ALB", "SQS", "Firehose", "CloudFormation", "Docker", "CI/CD", "Cron",
+    "AWS", "ECR", "S3", "Lambda", "DynamoDB", "ALB", "SQS", "Docker", "CI/CD", "Vite",
     "SOC2 Compliance", "OAuth 2.0", "MFA", "CORS", "Secure Cookies", "osquery",
-    "Azure", "GCP", "Microsoft Graph API", "Zoho Mail API", "OpenAI API", "Groq", "Gemini", "Selenium",
-    "Git", "Bitbucket", "Jira", "Gunicorn", "Nginx", "Docker Compose", "Linux"
+    "Google Drive API", "Google Sheets API", "OpenAI API", "Groq", "Gemini", "Selenium",
+    "Git", "Bitbucket", "Vitest", "Docker Compose", "Linux"
   ],
 
   experienceBlocks: [
@@ -50,6 +50,10 @@ export const siteContent: SiteContent = {
       period: "Aug 2024 – Present",
       description: "B2B automated cloud compliance & security management platform serving regulated enterprises.",
       items: [
+        {
+          title: "Trackr — Google-Backed Tracking BI",
+          description: "Architected a single-container Node/React BI tool leveraging Google Sheets as a zero-DB data layer. Engineered secure per-user OAuth and stored configs via Drive APIs. Shipped a draggable dashboard with 21 widget types and cross-sheet joins. Eliminated database overhead by collapsing a legacy 5-service Docker stack into a single 80MB container.",
+        },
         {
           title: "Generative AI & LLM Integration",
           description: "Designed and shipped a real-time Compliance Remediation Assistant integrating OpenAI and Groq models with precision-engineered system prompts, reducing mean time-to-remediation for compliance gaps.",
@@ -99,6 +103,18 @@ export const siteContent: SiteContent = {
 
   projects: [
     {
+      title: "Trackr — Google-Backed Tracking BI",
+      description: "A self-hostable BI dashboard leveraging Google Sheets as a zero-DB data layer via per-user OAuth. Ships a draggable canvas with 21 widget types and cross-sheet aggregation. Re-architected a legacy 5-service Docker/MySQL stack into a single 80MB Node container—delivering the same product with half the code and zero operational overhead. (Node 20, Fastify, React, TanStack Query, Recharts, Google APIs)",
+      animationType: "chart",
+      telemetry: [
+        { label: "ARCHITECTURE", value: "ZERO-DB" },
+        { label: "CONTAINERS", value: "5 → 1" },
+        { label: "WIDGET TYPES", value: "21" }
+      ],
+      colSpan: "md:col-span-3",
+      delay: 0.1,
+    },
+    {
       title: "Gold Price Prediction Pipeline",
       description: "Built a machine learning regression pipeline to forecast gold prices from macroeconomic indicators, applying feature engineering and cross-validation techniques. (Python, Scikit-learn, Pandas)",
       animationType: "pulse",
@@ -108,7 +124,7 @@ export const siteContent: SiteContent = {
         { label: "DATASET", value: "10K SAMPLES" }
       ],
       colSpan: "md:col-span-1",
-      delay: 0.1,
+      delay: 0.2,
     },
     {
       title: "Encrypted Cloud Data Search",
@@ -120,18 +136,6 @@ export const siteContent: SiteContent = {
         { label: "SCHEME", value: "SSE" }
       ],
       colSpan: "md:col-span-2",
-      delay: 0.2,
-    },
-    {
-      title: "Automated Cloud Compliance & Security",
-      description: "Contributed to a B2B platform for regulated enterprises. Automated SOC2 compliance hardening, cross-platform device management via osquery, and integrated a real-time LLM-powered Compliance Remediation Assistant using OpenAI and Groq to drastically reduce mean time-to-remediation. (Next.js, Python, AWS, AI Agents)",
-      animationType: "secure",
-      telemetry: [
-        { label: "POLICY", value: "SOC2" },
-        { label: "AGENTS", value: "ACTIVE" },
-        { label: "LLM", value: "GROQ-LLAMA3" }
-      ],
-      colSpan: "md:col-span-3",
       delay: 0.3,
     },
   ]

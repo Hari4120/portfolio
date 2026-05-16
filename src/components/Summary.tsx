@@ -152,7 +152,9 @@ function SystemConnections({ progressRef }: { progressRef: React.MutableRefObjec
     }
     const tex = new THREE.CanvasTexture(canvas);
     tex.needsUpdate = true;
-    setAtlasTexture(tex);
+    requestAnimationFrame(() => {
+      setAtlasTexture(tex);
+    });
   }, []);
 
   const particleMaterial = useMemo(() => new THREE.ShaderMaterial({

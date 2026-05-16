@@ -8,6 +8,7 @@ export default function VelocityMetrics() {
   const containerRef = useRef<HTMLDivElement>(null);
   const row1Ref = useRef<HTMLDivElement>(null);
   const row2Ref = useRef<HTMLDivElement>(null);
+  const row3Ref = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
     gsap.to(row1Ref.current, {
@@ -23,6 +24,17 @@ export default function VelocityMetrics() {
 
     gsap.to(row2Ref.current, {
       xPercent: 30,
+      ease: "none",
+      scrollTrigger: {
+        trigger: containerRef.current,
+        start: "top bottom",
+        end: "bottom top",
+        scrub: 1,
+      },
+    });
+
+    gsap.to(row3Ref.current, {
+      xPercent: -40,
       ease: "none",
       scrollTrigger: {
         trigger: containerRef.current,
@@ -54,6 +66,15 @@ export default function VelocityMetrics() {
           </h2>
           <h2 className="text-[clamp(4rem,10vw,12rem)] font-black uppercase tracking-tighter leading-none text-white">
             10K+ USER SYNCS
+          </h2>
+        </div>
+
+        <div ref={row3Ref} className="flex whitespace-nowrap gap-16 ml-[5vw]">
+          <h2 className="text-[clamp(4rem,10vw,12rem)] font-black uppercase tracking-tighter leading-none text-transparent stroke-text">
+            DEBTLOCK → ZERO-OPS
+          </h2>
+          <h2 className="text-[clamp(4rem,10vw,12rem)] font-black uppercase tracking-tighter leading-none text-white">
+            DEBTLOCK → ZERO-OPS
           </h2>
         </div>
       </div>

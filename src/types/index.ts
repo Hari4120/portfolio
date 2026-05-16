@@ -14,7 +14,7 @@ export interface ExperienceBlock {
 export interface Project {
   title: string;
   description: string;
-  animationType?: 'pulse' | 'orbit' | 'secure';
+  animationType?: 'pulse' | 'orbit' | 'secure' | 'chart';
   telemetry: { label: string; value: string }[];
   colSpan: string;
   delay: number;
